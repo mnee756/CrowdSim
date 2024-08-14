@@ -3,22 +3,21 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <iostream>
+#include "AgentManager.h"
+#include "Vector2D.h"
+#include <chrono>
 
 int main() {
-    // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "Circle Moving Left and Right");
 
-    // Create a circle shape
-    sf::CircleShape circle(50); // Radius of 50 pixels
-    circle.setFillColor(sf::Color::Green);
-    circle.setPosition(375, 275); // Start in the middle of the window
+    AgentManager manager;
+    manager.addAgent(Vector2D(0.0, 0.0), Vector2D(10.0, 10.0));  
+    manager.addAgent(Vector2D(250.0, 250.0), Vector2D(10.0, 10.0));
 
-    // Movement variables
-    sf::Vector2f direction(1.0f, 0.0f); // Initially move right
-    float moveSpeed = 200.0f; // Pixels per second
-    sf::Clock clock; // Clock to measure time
+    auto lastTime = std::chrono::high_resolution_clock::now();
+    const std::chrono::duration<double> frameTime(1.0 / 60.0); // Target 60 FPS
 
-    // Main loop
+    sf::RenderWindow window(sf::VideoMode(800, 600), "CrowdSim");
+
     while (window.isOpen()) {
         sf::Event event;
         while (window.pollEvent(event)) {
@@ -26,26 +25,24 @@ int main() {
                 window.close();
         }
 
-        // Get the elapsed time since the last frame
-        sf::Time deltaTime = clock.restart();
+        // Measure elapsed time
+        auto currentTime = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> deltaTime = currentTime - lastTime;
+        lastTime = currentTime;
 
-        // Move the circle
-        circle.move(direction * moveSpeed * deltaTime.asSeconds());
+        // Update agents
+        manager.updateAgents(deltaTime.count());
 
-        // Check for boundary collisions and reverse direction if needed
-        if (circle.getPosition().x <= 0 || (circle.getPosition().x + circle.getRadius() * 2) >= window.getSize().x) {
-            direction.x *= -1.0f; // Reverse direction on X axis
+        // Clear the window
+        window.clear();
+
+        // Draw agents
+        for (const auto& agent : manager.agents) {
+            agent.draw(window);
         }
 
-        // Clear the window with black color
-        window.clear(sf::Color::Black);
-
-        // Draw the circle
-        window.draw(circle);
-
-        // Display what was drawn
+        // Display the window contents
         window.display();
     }
-
     return 0;
 }
