@@ -10,7 +10,7 @@
 int main() {
 
     AgentManager manager;
-    manager.addAgent(Vector2D(0.0, 0.0), Vector2D(10.0, 10.0));  
+    manager.addAgent(Vector2D(0.0, 0.0), Vector2D(20.0, 20.0));  
     manager.addAgent(Vector2D(250.0, 250.0), Vector2D(10.0, 10.0));
 
     auto lastTime = std::chrono::high_resolution_clock::now();
