@@ -3,4 +3,7 @@ C:\Users\Max\source\repos\CrowdSim\Agent.cpp(11,33): warning C4244: 'argument': 
 C:\Users\Max\source\repos\CrowdSim\Agent.cpp(11,26): warning C4244: 'argument': conversion from 'const double' to 'float', possible loss of data
 C:\Users\Max\source\repos\CrowdSim\Agent.cpp(18,43): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
 C:\Users\Max\source\repos\CrowdSim\Agent.cpp(18,31): warning C4244: 'argument': conversion from 'double' to 'float', possible loss of data
+  AgentManager.cpp
+  CrowdSim.cpp
+  Generating Code...
   CrowdSim.vcxproj -> C:\Users\Max\source\repos\CrowdSim\x64\Debug\CrowdSim.exe

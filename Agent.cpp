@@ -5,8 +5,8 @@ const double Agent::v_max = 5.0;
 const double Agent::v_pref = 2.5;
 const double Agent::a_max = 2.0; 
 
-Agent::Agent(const Vector2D& pos, const Vector2D& vel)
-    : position(pos), velocity(vel), shape(20) {  // Initialize circle with radius 20
+Agent::Agent(const Vector2D& pos, const Vector2D& vel, const Vector2D& goalPos)
+    : position(pos), velocity(vel), goalPosition(goalPos), shape(20) {  // Initialize circle with radius 20
     shape.setFillColor(sf::Color::Green);
     shape.setPosition(pos.x, pos.y);  // Set position to initial agent position
 }

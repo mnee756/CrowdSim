@@ -7,7 +7,7 @@
 class AgentManager {
 public:
     std::vector<Agent> agents;
-    void addAgent(const Vector2D& position, const Vector2D& velocity);
+    void addAgent(const Vector2D& position, const Vector2D& velocity, const Vector2D& goalPosition);
     void updateAgents(double deltaTime);
 };
 

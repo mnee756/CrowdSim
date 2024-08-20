@@ -1,9 +1,9 @@
 #include "AgentManager.h"
 
 
-void AgentManager::addAgent(const Vector2D& position, const Vector2D& velocity) 
+void AgentManager::addAgent(const Vector2D& position, const Vector2D& velocity, const Vector2D& goalPosition) 
 {
-    Agent agent(position, velocity);
+    Agent agent(position, velocity, goalPosition);
     agents.push_back(agent);
 }
 
