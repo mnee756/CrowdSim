@@ -1,12 +1,19 @@
-// CrowdSim.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
 #include "matplotlibcpp.h"
 #include <iostream>
 #include "AgentManager.h"
 #include "Vector2D.h"
+#include <cmath>
 #include <chrono>
 
+void plotCircle(double centerX, double centerY, double radius, int numPoints = 100);
+
 namespace plt = matplotlibcpp;
+
+#ifndef M_PI
+#define M_PI 3.14159265358979323846
+#endif
+
+
 
 int main() {
     std::cout << "Starting Sim\n";
@@ -36,8 +43,10 @@ int main() {
         // Clear the plot
         plt::clf();
 
-        // Plot agent positions as points
-        plt::scatter(x_positions, y_positions);
+        // Plot agent positions
+        for (int i = 0; i < x_positions.size(); ++i) {
+            plotCircle(x_positions[i], y_positions[i], 10.0);
+        }
 
         // Set plot limits (adjust as needed)
         plt::xlim(0, 800);  // X-axis limits
@@ -47,4 +56,22 @@ int main() {
         plt::pause(0.01);  // Pause briefly to update the plot
     }
     return 0;
+}
+
+void plotCircle(double centerX, double centerY, double radius, int numPoints) {
+    std::vector<double> x_circle, y_circle;
+
+    // Generate points around the circumference of the circle
+    for (int i = 0; i < numPoints; ++i) {
+        double angle = 2 * M_PI * i / numPoints;
+        x_circle.push_back(centerX + radius * cos(angle));
+        y_circle.push_back(centerY + radius * sin(angle));
+    }
+
+    // Close the circle by repeating the first point
+    x_circle.push_back(x_circle.front());
+    y_circle.push_back(y_circle.front());
+
+    // Plot the circle
+    plt::plot(x_circle, y_circle, "b-");  // 'b-' for blue line
 }
