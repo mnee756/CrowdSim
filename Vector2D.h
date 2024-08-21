@@ -12,6 +12,7 @@ public:
     Vector2D operator*(double scalar) const;
     Vector2D operator/(double scalar) const;
     double magnitude() const;
+    Vector2D normalize() const;
 };
 
 #endif // VECTOR2D_H

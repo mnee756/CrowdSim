@@ -24,3 +24,10 @@ double Vector2D::magnitude() const {
     return std::sqrt(x * x + y * y);
 }
 
+Vector2D Vector2D::normalize() const {
+    double mag = magnitude();
+    if (mag == 0) {
+        return Vector2D(0, 0);
+    }
+    return *this / mag;
+}

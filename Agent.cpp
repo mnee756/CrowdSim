@@ -6,16 +6,13 @@ const double Agent::v_pref = 2.5;
 const double Agent::a_max = 2.0; 
 
 Agent::Agent(const Vector2D& pos, const Vector2D& vel, const Vector2D& goalPos)
-    : position(pos), velocity(vel), goalPosition(goalPos), shape(20) {  // Initialize circle with radius 20
-    shape.setFillColor(sf::Color::Green);
-    shape.setPosition(pos.x, pos.y);  // Set position to initial agent position
+    : position(pos), velocity(vel), goalPosition(goalPos) {  // Initialize circle with radius 20
 }
 
 void Agent::update(double deltaTime, std::vector<Agent>& otherAgents)
 {   
     velocity = planVelocity(otherAgents);
     position = position + velocity * deltaTime;
-    shape.setPosition(position.x, position.y);
 }
 
 
@@ -32,14 +29,13 @@ Vector2D Agent::getRVO(std::vector<Agent>& otherAgents)
     return rvo;
 }
 
-void Agent::draw(sf::RenderWindow& window) const {
-    window.draw(shape);  // Draw the circle shape
-}
-
 Vector2D Agent::planVelocity(std::vector<Agent>& otherAgents)
 {
     Vector2D rvo = getRVO(otherAgents); //No idea what RVO looks like
-    //whole bunch of optimization???
+    //no path planning. optimal velocity is the vector directly to the goal at the preferred velocity
+    Vector2D optimalVel = (goalPosition - position).normalize() * v_pref;
+    
+
     Vector2D velocity = Vector2D(10.0, 10.0);
     return velocity;
 }
