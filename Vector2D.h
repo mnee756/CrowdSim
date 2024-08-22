@@ -12,6 +12,8 @@ public:
     Vector2D operator*(double scalar) const;
     Vector2D operator/(double scalar) const;
     double magnitude() const;
+    double dot(const Vector2D& other) const;
+    double angleBetween(const Vector2D& other) const;
     Vector2D normalize() const;
 };
 

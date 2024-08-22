@@ -6,20 +6,18 @@
 #include <chrono>
 
 void plotCircle(double centerX, double centerY, double radius, int numPoints = 100);
-
 namespace plt = matplotlibcpp;
 
 #ifndef M_PI
 #define M_PI 3.14159265358979323846
 #endif
 
-
-
 int main() {
     std::cout << "Starting Sim\n";
+    int scale = 2;
     AgentManager manager;
-    manager.addAgent(Vector2D(0.0, 0.0), Vector2D(20.0, 20.0), Vector2D(200.0, 400.0));
-    manager.addAgent(Vector2D(250.0, 250.0), Vector2D(10.0, 10.0), Vector2D(400.0, 200.0));
+    manager.addAgent(Vector2D(20.0, 20.0), Vector2D(20.0, 20.0), Vector2D(100.0, 100.0), 1.0);
+    manager.addAgent(Vector2D(100.0, 100.0), Vector2D(10.0, 10.0), Vector2D(20.0, 20.0), 1.0);
     
     auto lastTime = std::chrono::high_resolution_clock::now();
     const std::chrono::duration<double> frameTime(1.0 / 60.0); // Target 60 FPS
@@ -31,7 +29,7 @@ int main() {
         lastTime = currentTime;
 
         // Update agents
-        manager.updateAgents(deltaTime.count());
+        
 
         // Collect agent positions for plotting
         std::vector<double> x_positions, y_positions;
@@ -45,15 +43,16 @@ int main() {
 
         // Plot agent positions
         for (int i = 0; i < x_positions.size(); ++i) {
-            plotCircle(x_positions[i], y_positions[i], 10.0);
+            plotCircle(x_positions[i], y_positions[i], 1.0);
         }
 
         // Set plot limits (adjust as needed)
-        plt::xlim(0, 800);  // X-axis limits
-        plt::ylim(0, 600);  // Y-axis limits
+        plt::xlim(0, 400 / scale);  // X-axis limits
+        plt::ylim(0, 300 / scale);  // Y-axis limits
 
         // Draw the plot
         plt::pause(0.01);  // Pause briefly to update the plot
+        manager.updateAgents(deltaTime.count());
     }
     return 0;
 }
