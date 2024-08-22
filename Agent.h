@@ -23,6 +23,7 @@ public:
 	void update(double deltaTime, std::vector<Agent>& otherAgents);
 	std::vector<Agent> detectObstacles(std::vector<Agent>& otherAgents, double neighbor_radius);
 	bool isInRVO(Vector2D velocity,std::vector<Agent>& otherAgents);
+	Vector2D hookeJeeves(Vector2D pref_vel, Vector2D curr_vel, std::vector<Agent>& neighbors, double step, double tolerance);
 	Vector2D planVelocity(std::vector<Agent>& otherAgents);
 };
 #endif // AGENT_H

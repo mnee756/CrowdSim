@@ -16,8 +16,10 @@ int main() {
     std::cout << "Starting Sim\n";
     int scale = 2;
     AgentManager manager;
-    manager.addAgent(Vector2D(20.0, 20.0), Vector2D(20.0, 20.0), Vector2D(100.0, 100.0), 1.0);
-    manager.addAgent(Vector2D(100.0, 100.0), Vector2D(10.0, 10.0), Vector2D(20.0, 20.0), 1.0);
+    manager.addAgent(Vector2D(10.0, 10.0), Vector2D(0.0, 0.0), Vector2D(110.0, 110.0), 1.0);
+    manager.addAgent(Vector2D(110.0, 110.0), Vector2D(0.0, 0.0), Vector2D(10.0, 10.0), 1.0);
+    manager.addAgent(Vector2D(110.0, 10.0), Vector2D(0.0, 0.0), Vector2D(10.0, 110.0), 1.0);
+    //manager.addAgent(Vector2D(10.0, 110.0), Vector2D(0.0, 0.0), Vector2D(110.0, 10.0), 1.0);
     
     auto lastTime = std::chrono::high_resolution_clock::now();
     const std::chrono::duration<double> frameTime(1.0 / 60.0); // Target 60 FPS
